@@ -54,124 +54,136 @@
       <strong>Looking for something else?</strong> Grade appeals, enrollment questions, and general concerns go through the Registrar or Guidance Office directly, not this form.
     </div>
 
-    <div class="mode-toggle" role="tablist" aria-label="Report type">
-      <button type="button" class="mode-btn active" data-mode="inquiry" role="tab" aria-selected="true">
-        <span class="k">Not urgent</span>
-        <span class="t">Privacy Inquiry or Request</span>
-      </button>
-      <button type="button" class="mode-btn" data-mode="breach" role="tab" aria-selected="false">
-        <span class="k">Time-sensitive</span>
-        <span class="t">Report a Suspected Breach</span>
-      </button>
+    <div class="choice-step" id="choiceStep">
+      <div class="choice-grid">
+        <button type="button" class="choice-card" data-choice="inquiry">
+          <span class="choice-tag">Not urgent</span>
+          <h3>Privacy Inquiry or Request</h3>
+          <p>Use this if you want to see, correct, or delete your personal data, or you have a question or complaint about how it's been handled. You'll hear back within 3 business days.</p>
+          <ul class="choice-examples">
+            <li>Request to access my personal data</li>
+            <li>Request to correct my personal data</li>
+            <li>Request to delete my personal data</li>
+            <li>General question about how my data is used</li>
+            <li>Complaint about how my data was handled</li>
+          </ul>
+          <span class="choice-cta">Select this option →</span>
+        </button>
+        <button type="button" class="choice-card choice-card-urgent" data-choice="breach">
+          <span class="choice-tag">Time-sensitive</span>
+          <h3>Report a Suspected Breach</h3>
+          <p>Use this if personal data may have been lost, stolen, accessed without authorization, or sent to the wrong person. This immediately alerts the Data Breach Response Team.</p>
+          <ul class="choice-examples">
+            <li>Lost or stolen device/document with student data</li>
+            <li>Unauthorized person accessed student records</li>
+            <li>Data sent to the wrong recipient</li>
+            <li>Suspicious system access or possible hacking</li>
+            <li>Other suspected breach</li>
+          </ul>
+          <span class="choice-cta">Select this option →</span>
+        </button>
+      </div>
     </div>
 
-    <div class="urgent-banner" id="urgentBanner">
-      <b>If this is an active, ongoing incident:</b>
-      Submit this form, then call or message the DPO directly at <strong>[DPO contact number]</strong> — do not wait for an email reply. The Data Breach Response Team is notified the moment you submit.
-    </div>
-
-    <form id="privacyForm" action="https://formspree.io/f/xbgloyzv" method="POST">
-      <input type="hidden" name="report_mode" id="report_mode" value="inquiry">
-      <input type="hidden" name="_subject" id="emailSubject" value="NDHSCCI Privacy Channel — New Inquiry">
-      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-      <div class="form-error" id="formError" role="alert"></div>
-
-      <fieldset>
-        <legend>Who you are</legend>
-        <div class="anon-toggle">
-          <input type="checkbox" id="anonToggle" name="submit_anonymously">
-          <label for="anonToggle" style="margin:0;font-weight:400;">I want to submit this anonymously (the DPO won't be able to follow up with you directly)</label>
-        </div>
-        <div class="row2">
-          <div class="field">
-            <label for="fullName">Full name <span class="opt">(optional if anonymous)</span></label>
-            <input type="text" id="fullName" name="full_name" autocomplete="name">
-          </div>
-          <div class="field">
-            <label for="relation">You are a</label>
-            <select id="relation" name="relationship">
-              <option>Student</option>
-              <option>Parent / Guardian</option>
-              <option>Faculty / Staff</option>
-              <option>Applicant</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="row2" style="margin-top:16px;">
-          <div class="field">
-            <label for="email">Email <span class="opt">(for updates on this report)</span></label>
-            <input type="email" id="email" name="email" autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="phone">Contact number <span class="opt">(optional)</span></label>
-            <input type="tel" id="phone" name="phone" autocomplete="tel">
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>What this is about</legend>
-        <div class="field">
-          <label for="natureSelect">Nature of your report</label>
-          <select id="natureSelect" name="nature">
-            <optgroup label="Privacy inquiry or request" id="grp-inquiry">
-              <option>Request to access my personal data</option>
-              <option>Request to correct my personal data</option>
-              <option>Request to delete my personal data</option>
-              <option>General question about how my data is used</option>
-              <option>Complaint about how my data was handled</option>
-            </optgroup>
-            <optgroup label="Suspected breach or incident" id="grp-breach">
-              <option>Lost or stolen device/document with student data</option>
-              <option>Unauthorized person accessed student records</option>
-              <option>Data sent to the wrong recipient</option>
-              <option>Suspicious system access or possible hacking</option>
-              <option>Other suspected breach</option>
-            </optgroup>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="dataTypes">What kind of data is involved? <span class="opt">(check all that apply)</span></label>
-          <div class="check-grid">
-            <label class="check-item"><input type="checkbox" name="data_types" value="Name/contact info"> Name / contact info</label>
-            <label class="check-item"><input type="checkbox" name="data_types" value="Grades/academic records"> Grades / academic records</label>
-            <label class="check-item"><input type="checkbox" name="data_types" value="Health records"> Health records</label>
-            <label class="check-item"><input type="checkbox" name="data_types" value="Government ID numbers"> Government ID numbers</label>
-            <label class="check-item"><input type="checkbox" name="data_types" value="Financial/billing info"> Financial / billing info</label>
-            <label class="check-item"><input type="checkbox" name="data_types" value="Other/not sure"> Other / not sure</label>
-          </div>
-        </div>
-
-        <div class="field" id="whenField" style="display:none;">
-          <label for="whenNoticed">When did you notice this?</label>
-          <input type="date" id="whenNoticed" name="date_noticed">
-        </div>
-
-        <div class="field">
-          <label for="details">Details</label>
-          <textarea id="details" name="details" placeholder="Describe what happened, where, and anything else the DPO should know."></textarea>
-        </div>
-      </fieldset>
-
-      <div class="submit-row">
-        <button type="submit" class="submit" id="submitBtn">Send to the Data Protection Officer</button>
-        <p class="submit-note">
-          <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M2 6.5V4a4 4 0 0 1 8 0v2.5" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="6.5" width="10" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.3"/></svg>
-          Sent directly to the DPO over an encrypted connection
-        </p>
+    <div class="form-step" id="formStep" style="display:none;">
+      <div class="current-choice-bar">
+        <span>Filing a: <strong id="currentChoiceLabel">Privacy Inquiry or Request</strong></span>
+        <button type="button" class="change-type-link" id="changeType">← Change report type</button>
       </div>
-    </form>
 
-    <div class="confirm" id="confirmPanel">
-      <div class="seal-ok">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="urgent-banner" id="urgentBanner">
+        <b>If this is an active, ongoing incident:</b>
+        Submit this form, then call or message the DPO directly at <strong>[DPO contact number]</strong> — do not wait for an email reply. The Data Breach Response Team is notified the moment you submit.
       </div>
-      <h2>Report received</h2>
-      <p id="confirmText">Your report has been sent to the Office of the Data Protection Officer. If you left contact details, you'll hear back within 3 business days.</p>
-      <div class="ref" id="refNumber">REF: —</div>
-      <p style="margin-top:22px;"><a href="index.html">← Back to Home</a></p>
+
+      <form id="privacyForm" action="https://formspree.io/f/xbgloyzv" method="POST">
+        <input type="hidden" name="report_mode" id="report_mode" value="inquiry">
+        <input type="hidden" name="_subject" id="emailSubject" value="NDHSCCI Privacy Channel — New Inquiry">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="form-error" id="formError" role="alert"></div>
+
+        <fieldset>
+          <legend>Who you are</legend>
+          <div class="anon-toggle">
+            <input type="checkbox" id="anonToggle" name="submit_anonymously">
+            <label for="anonToggle" style="margin:0;font-weight:400;">I want to submit this anonymously (the DPO won't be able to follow up with you directly)</label>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="fullName">Full name <span class="opt">(optional if anonymous)</span></label>
+              <input type="text" id="fullName" name="full_name" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="relation">You are a</label>
+              <select id="relation" name="relationship">
+                <option>Student</option>
+                <option>Parent / Guardian</option>
+                <option>Faculty / Staff</option>
+                <option>Applicant</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="row2" style="margin-top:16px;">
+            <div class="field">
+              <label for="email">Email <span class="opt">(for updates on this report)</span></label>
+              <input type="email" id="email" name="email" autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="phone">Contact number <span class="opt">(optional)</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>What this is about</legend>
+          <div class="field">
+            <label for="natureSelect">Nature of your report</label>
+            <select id="natureSelect" name="nature"></select>
+          </div>
+
+          <div class="field">
+            <label for="dataTypes">What kind of data is involved? <span class="opt">(check all that apply)</span></label>
+            <div class="check-grid">
+              <label class="check-item"><input type="checkbox" name="data_types" value="Name/contact info"> Name / contact info</label>
+              <label class="check-item"><input type="checkbox" name="data_types" value="Grades/academic records"> Grades / academic records</label>
+              <label class="check-item"><input type="checkbox" name="data_types" value="Health records"> Health records</label>
+              <label class="check-item"><input type="checkbox" name="data_types" value="Government ID numbers"> Government ID numbers</label>
+              <label class="check-item"><input type="checkbox" name="data_types" value="Financial/billing info"> Financial / billing info</label>
+              <label class="check-item"><input type="checkbox" name="data_types" value="Other/not sure"> Other / not sure</label>
+            </div>
+          </div>
+
+          <div class="field" id="whenField" style="display:none;">
+            <label for="whenNoticed">When did you notice this?</label>
+            <input type="date" id="whenNoticed" name="date_noticed">
+          </div>
+
+          <div class="field">
+            <label for="details">Details</label>
+            <textarea id="details" name="details" placeholder="Describe what happened, where, and anything else the DPO should know."></textarea>
+          </div>
+        </fieldset>
+
+        <div class="submit-row">
+          <button type="submit" class="submit" id="submitBtn">Send to the Data Protection Officer</button>
+          <p class="submit-note">
+            <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M2 6.5V4a4 4 0 0 1 8 0v2.5" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="6.5" width="10" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.3"/></svg>
+            Sent directly to the DPO over an encrypted connection
+          </p>
+        </div>
+      </form>
+
+      <div class="confirm" id="confirmPanel">
+        <div class="seal-ok">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2>Report received</h2>
+        <p id="confirmText">Your report has been sent to the Office of the Data Protection Officer. If you left contact details, you'll hear back within 3 business days.</p>
+        <div class="ref" id="refNumber">REF: —</div>
+        <p style="margin-top:22px;"><a href="index.html">← Back to Home</a></p>
+      </div>
     </div>
 
   </div>
