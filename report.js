@@ -1,39 +1,78 @@
-const modeBtns = document.querySelectorAll('.mode-btn');
+const choiceStep = document.getElementById('choiceStep');
+const formStep = document.getElementById('formStep');
+const choiceCards = document.querySelectorAll('.choice-card');
+const currentChoiceLabel = document.getElementById('currentChoiceLabel');
+const changeTypeBtn = document.getElementById('changeType');
 const urgentBanner = document.getElementById('urgentBanner');
 const reportModeInput = document.getElementById('report_mode');
 const emailSubject = document.getElementById('emailSubject');
 const whenField = document.getElementById('whenField');
-const grpInquiry = document.getElementById('grp-inquiry');
-const grpBreach = document.getElementById('grp-breach');
 const natureSelect = document.getElementById('natureSelect');
 const submitBtn = document.getElementById('submitBtn');
 
-function setMode(mode){
-  modeBtns.forEach(b => {
-    const active = b.dataset.mode === mode;
-    b.classList.toggle('active', active);
-    b.setAttribute('aria-selected', active ? 'true' : 'false');
+const NATURE_OPTIONS = {
+  inquiry: [
+    'Request to access my personal data',
+    'Request to correct my personal data',
+    'Request to delete my personal data',
+    'General question about how my data is used',
+    'Complaint about how my data was handled'
+  ],
+  breach: [
+    'Lost or stolen device/document with student data',
+    'Unauthorized person accessed student records',
+    'Data sent to the wrong recipient',
+    'Suspicious system access or possible hacking',
+    'Other suspected breach'
+  ]
+};
+
+const CHOICE_LABELS = {
+  inquiry: 'Privacy Inquiry or Request',
+  breach: 'Report a Suspected Breach'
+};
+
+function populateNature(type){
+  natureSelect.innerHTML = '';
+  NATURE_OPTIONS[type].forEach(text => {
+    const opt = document.createElement('option');
+    opt.textContent = text;
+    natureSelect.appendChild(opt);
   });
-  reportModeInput.value = mode;
-  if(mode === 'breach'){
+}
+
+function selectReportType(type){
+  reportModeInput.value = type;
+  populateNature(type);
+  currentChoiceLabel.textContent = CHOICE_LABELS[type];
+
+  if(type === 'breach'){
     urgentBanner.classList.add('show');
     whenField.style.display = 'block';
     emailSubject.value = 'NDHSCCI Privacy Channel — SUSPECTED BREACH';
     submitBtn.textContent = 'Send urgent report to DPO & Breach Response Team';
     submitBtn.dataset.label = submitBtn.textContent;
-    try{ natureSelect.value = grpBreach.querySelector('option').value; }catch(e){}
   } else {
     urgentBanner.classList.remove('show');
     whenField.style.display = 'none';
     emailSubject.value = 'NDHSCCI Privacy Channel — New Inquiry';
     submitBtn.textContent = 'Send to the Data Protection Officer';
     submitBtn.dataset.label = submitBtn.textContent;
-    try{ natureSelect.value = grpInquiry.querySelector('option').value; }catch(e){}
   }
+
+  choiceStep.style.display = 'none';
+  formStep.style.display = 'block';
+  formStep.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-modeBtns.forEach(btn => {
-  btn.addEventListener('click', () => setMode(btn.dataset.mode));
+choiceCards.forEach(card => {
+  card.addEventListener('click', () => selectReportType(card.dataset.choice));
+});
+
+changeTypeBtn.addEventListener('click', () => {
+  formStep.style.display = 'none';
+  choiceStep.style.display = 'block';
+  choiceStep.scrollIntoView({behavior:'smooth', block:'start'});
 });
 
 const anonToggle = document.getElementById('anonToggle');
@@ -88,7 +127,7 @@ form.addEventListener('submit', async function(e){
         : "Your report has been sent to the Office of the Data Protection Officer. If you left contact details, you'll hear back within 3 business days.";
 
       form.style.display = 'none';
-      document.querySelector('.mode-toggle').style.display = 'none';
+      document.querySelector('.current-choice-bar').style.display = 'none';
       urgentBanner.classList.remove('show');
       document.getElementById('confirmPanel').classList.add('show');
       document.getElementById('confirmPanel').scrollIntoView({behavior:'smooth', block:'start'});
