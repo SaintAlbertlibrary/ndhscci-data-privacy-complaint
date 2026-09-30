@@ -1,89 +1,3 @@
-const choiceStep = document.getElementById('choiceStep');
-const formStep = document.getElementById('formStep');
-const choiceCards = document.querySelectorAll('.choice-card');
-const currentChoiceLabel = document.getElementById('currentChoiceLabel');
-const changeTypeBtn = document.getElementById('changeType');
-const urgentBanner = document.getElementById('urgentBanner');
-const reportModeInput = document.getElementById('report_mode');
-const emailSubject = document.getElementById('emailSubject');
-const whenField = document.getElementById('whenField');
-const natureSelect = document.getElementById('natureSelect');
-const submitBtn = document.getElementById('submitBtn');
-
-const NATURE_OPTIONS = {
-  inquiry: [
-    'Request to access my personal data',
-    'Request to correct my personal data',
-    'Request to delete my personal data',
-    'General question about how my data is used',
-    'Complaint about how my data was handled'
-  ],
-  breach: [
-    'Lost or stolen device/document with student data',
-    'Unauthorized person accessed student records',
-    'Data sent to the wrong recipient',
-    'Suspicious system access or possible hacking',
-    'Other suspected breach'
-  ]
-};
-
-const CHOICE_LABELS = {
-  inquiry: 'Privacy Inquiry or Request',
-  breach: 'Report a Suspected Breach'
-};
-
-function populateNature(type){
-  natureSelect.innerHTML = '';
-  NATURE_OPTIONS[type].forEach(text => {
-    const opt = document.createElement('option');
-    opt.textContent = text;
-    natureSelect.appendChild(opt);
-  });
-}
-
-function selectReportType(type){
-  reportModeInput.value = type;
-  populateNature(type);
-  currentChoiceLabel.textContent = CHOICE_LABELS[type];
-
-  if(type === 'breach'){
-    urgentBanner.classList.add('show');
-    whenField.style.display = 'block';
-    emailSubject.value = 'NDHSCCI Privacy Channel — SUSPECTED BREACH';
-    submitBtn.textContent = 'Send urgent report to DPO & Breach Response Team';
-    submitBtn.dataset.label = submitBtn.textContent;
-  } else {
-    urgentBanner.classList.remove('show');
-    whenField.style.display = 'none';
-    emailSubject.value = 'NDHSCCI Privacy Channel — New Inquiry';
-    submitBtn.textContent = 'Send to the Data Protection Officer';
-    submitBtn.dataset.label = submitBtn.textContent;
-  }
-
-  choiceStep.style.display = 'none';
-  formStep.style.display = 'block';
-  formStep.scrollIntoView({behavior:'smooth', block:'start'});
-}
-
-choiceCards.forEach(card => {
-  card.addEventListener('click', () => selectReportType(card.dataset.choice));
-});
-
-changeTypeBtn.addEventListener('click', () => {
-  formStep.style.display = 'none';
-  choiceStep.style.display = 'block';
-  choiceStep.scrollIntoView({behavior:'smooth', block:'start'});
-});
-
-const anonToggle = document.getElementById('anonToggle');
-const fullName = document.getElementById('fullName');
-const email = document.getElementById('email');
-const phone = document.getElementById('phone');
-anonToggle.addEventListener('change', () => {
-  const anon = anonToggle.checked;
-  [fullName, email, phone].forEach(f => { f.disabled = anon; if(anon) f.value=''; });
-});
-
 function refNumber(){
   const d = new Date();
   const pad = n => String(n).padStart(2,'0');
@@ -93,6 +7,7 @@ function refNumber(){
 
 const form = document.getElementById('privacyForm');
 const formError = document.getElementById('formError');
+const submitBtn = document.getElementById('submitBtn');
 
 function showError(message){
   formError.textContent = message;
@@ -121,14 +36,10 @@ form.addEventListener('submit', async function(e){
     if(response.ok){
       const ref = refNumber();
       document.getElementById('refNumber').textContent = 'REF: ' + ref;
-      const isAnon = anonToggle.checked;
-      document.getElementById('confirmText').textContent = isAnon
-        ? 'Your anonymous report has been sent to the Office of the Data Protection Officer. Since no contact details were provided, please keep your reference number for any follow-up.'
-        : "Your report has been sent to the Office of the Data Protection Officer. If you left contact details, you'll hear back within 3 business days.";
 
       form.style.display = 'none';
-      document.querySelector('.current-choice-bar').style.display = 'none';
-      urgentBanner.classList.remove('show');
+      document.querySelector('#breachFormStep .current-choice-bar').style.display = 'none';
+      document.querySelector('#breachFormStep .urgent-banner').style.display = 'none';
       document.getElementById('confirmPanel').classList.add('show');
       document.getElementById('confirmPanel').scrollIntoView({behavior:'smooth', block:'start'});
     } else {
