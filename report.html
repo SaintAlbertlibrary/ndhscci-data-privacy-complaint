@@ -46,7 +46,7 @@
   <div class="wrap-narrow">
     <div class="breadcrumb"><a href="index.html">← Back to Home</a></div>
     <h1>Submit your report</h1>
-    <p>This channel is exclusively for data privacy concerns — access/correction/erasure requests, privacy complaints, and suspected data breaches. It is not monitored for academic, disciplinary, or general school matters.</p>
+    <p>Access and Correction requests follow the official forms in the NDHSCCI Data Privacy Manual (Annexes D and E) and download as a signable PDF. Suspected breaches are submitted directly online. This channel is not monitored for academic, disciplinary, or general school matters.</p>
   </div>
 </div>
 
@@ -58,62 +58,218 @@
     </div>
 
     <div class="choice-step" id="choiceStep">
-      <div class="choice-grid">
-        <button type="button" class="choice-card" data-choice="inquiry">
-          <span class="choice-tag">Not urgent</span>
-          <h3>Privacy Inquiry or Request</h3>
-          <p>Use this if you want to see, correct, or delete your personal data, or you have a question or complaint about how it's been handled. You'll hear back within 3 business days.</p>
+      <div class="choice-grid choice-grid-3">
+        <button type="button" class="choice-card" data-choice="access">
+          <span class="choice-tag">Annex E — Form 5</span>
+          <h3>Access to Information Request</h3>
+          <p>Use this to request a copy of, or to view, the personal data NDHSCCI holds about you.</p>
           <ul class="choice-examples">
-            <li>Request to access my personal data</li>
-            <li>Request to correct my personal data</li>
-            <li>Request to delete my personal data</li>
-            <li>General question about how my data is used</li>
-            <li>Complaint about how my data was handled</li>
+            <li>See what data is on file about me</li>
+            <li>Request paper or electronic copies</li>
+            <li>View records without taking a copy</li>
+          </ul>
+          <span class="choice-cta">Select this option →</span>
+        </button>
+        <button type="button" class="choice-card" data-choice="correction">
+          <span class="choice-tag">Annex D — Form 4</span>
+          <h3>Personal Data Correction Request</h3>
+          <p>Use this if information NDHSCCI holds about you is wrong, outdated, or incomplete.</p>
+          <ul class="choice-examples">
+            <li>Fix a misspelled name or wrong details</li>
+            <li>Update outdated contact information</li>
+            <li>Correct an inaccurate record, with proof</li>
           </ul>
           <span class="choice-cta">Select this option →</span>
         </button>
         <button type="button" class="choice-card choice-card-urgent" data-choice="breach">
-          <span class="choice-tag">Time-sensitive</span>
+          <span class="choice-tag">Urgent — submitted online</span>
           <h3>Report a Suspected Breach</h3>
-          <p>Use this if personal data may have been lost, stolen, accessed without authorization, or sent to the wrong person. This immediately alerts the Data Breach Response Team.</p>
+          <p>Use this if personal data may have been lost, stolen, or accessed without authorization. No printing — this alerts the Data Breach Response Team immediately.</p>
           <ul class="choice-examples">
             <li>Lost or stolen device/document with student data</li>
-            <li>Unauthorized person accessed student records</li>
+            <li>Unauthorized access or suspicious activity</li>
             <li>Data sent to the wrong recipient</li>
-            <li>Suspicious system access or possible hacking</li>
-            <li>Other suspected breach</li>
           </ul>
           <span class="choice-cta">Select this option →</span>
         </button>
       </div>
     </div>
 
-    <div class="form-step" id="formStep" style="display:none;">
+    <!-- ===================== ACCESS TO INFORMATION REQUEST (Annex E) ===================== -->
+    <div class="form-step" id="accessFormStep" style="display:none;">
       <div class="current-choice-bar">
-        <span>Filing a: <strong id="currentChoiceLabel">Privacy Inquiry or Request</strong></span>
-        <button type="button" class="change-type-link" id="changeType">← Change report type</button>
+        <span>Filing: <strong>Access to Information Request</strong> <span class="annex-ref">(Annex E — Form 5)</span></span>
+        <button type="button" class="change-type-link change-type-btn">← Change request type</button>
       </div>
 
-      <div class="urgent-banner" id="urgentBanner">
+      <div class="pdf-note">
+        <b>This generates a printable PDF, not a live submission.</b>
+        Fill in the fields below, download the completed form, then sign it by hand and submit it to the DPO in person or by email attachment.
+      </div>
+
+      <form id="accessForm" onsubmit="return false;">
+        <fieldset>
+          <legend>Where to look</legend>
+          <div class="field">
+            <label for="accessOffice">Office/department most likely to have this information</label>
+            <input type="text" id="accessOffice" placeholder="e.g. Registrar, Guidance Office, HR">
+          </div>
+          <div class="field">
+            <label for="accessDetails">Details regarding the information being sought</label>
+            <textarea id="accessDetails" placeholder="Subject matter, type of record, date, personal circumstances, etc."></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Method of access preferred</legend>
+          <div class="radio-list">
+            <label class="radio-item"><input type="radio" name="accessMethod" value="Receive paper copies of the document/s" checked> Receive paper copies of the document/s</label>
+            <label class="radio-item"><input type="radio" name="accessMethod" value="Receive electronic copies of the document/s"> Receive electronic copies of the document/s</label>
+            <label class="radio-item"><input type="radio" name="accessMethod" value="View only the information being sought"> View only the information being sought</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your details</legend>
+          <div class="row2">
+            <div class="field">
+              <label for="accessName">Full name of requestor</label>
+              <input type="text" id="accessName" autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="accessContact">Contact number</label>
+              <input type="tel" id="accessContact" autocomplete="tel">
+            </div>
+          </div>
+          <div class="field">
+            <label for="accessEmail">Email address</label>
+            <input type="email" id="accessEmail" autocomplete="email">
+          </div>
+        </fieldset>
+
+        <div class="signature-note">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 12.5L11 4.5L13.5 7L5.5 15H3V12.5Z" stroke="currentColor" stroke-width="1.3"/></svg>
+          The PDF's signature and date lines are left blank — sign them by hand after printing.
+        </div>
+
+        <div class="submit-row">
+          <button type="button" class="submit" id="accessGenerateBtn">Download completed PDF</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ===================== PERSONAL DATA CORRECTION REQUEST (Annex D) ===================== -->
+    <div class="form-step" id="correctionFormStep" style="display:none;">
+      <div class="current-choice-bar">
+        <span>Filing: <strong>Personal Data Correction Request</strong> <span class="annex-ref">(Annex D — Form 4)</span></span>
+        <button type="button" class="change-type-link change-type-btn">← Change request type</button>
+      </div>
+
+      <div class="pdf-note">
+        <b>This generates a printable PDF, not a live submission.</b>
+        Fill in the fields below, download the completed form, then sign it by hand and submit it to the DPO in person or by email attachment.
+      </div>
+
+      <form id="correctionForm" onsubmit="return false;">
+        <fieldset>
+          <legend>Requestor's personal particulars</legend>
+          <div class="field">
+            <label for="corrReqName">Name of requestor</label>
+            <input type="text" id="corrReqName" autocomplete="name">
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="corrReqAddress">Address</label>
+              <input type="text" id="corrReqAddress">
+            </div>
+            <div class="field">
+              <label for="corrReqContact">Contact number</label>
+              <input type="tel" id="corrReqContact" autocomplete="tel">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Data subject</legend>
+          <div class="anon-toggle">
+            <input type="checkbox" id="corrSameAsRequestor" checked>
+            <label for="corrSameAsRequestor" style="margin:0;font-weight:400;">The requestor is the data subject (the request is about my own data)</label>
+          </div>
+          <div id="corrSubjectFields" style="display:none;">
+            <div class="field">
+              <label for="corrSubName">Name of data subject</label>
+              <input type="text" id="corrSubName">
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label for="corrSubAddress">Address</label>
+                <input type="text" id="corrSubAddress">
+              </div>
+              <div class="field">
+                <label for="corrSubContact">Contact number</label>
+                <input type="tel" id="corrSubContact">
+              </div>
+            </div>
+            <div class="field">
+              <label for="corrSubEmail">Email address</label>
+              <input type="email" id="corrSubEmail">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Personal data to which the request relates</legend>
+          <div class="correction-table" id="correctionTable">
+            <div class="correction-table-head">
+              <span>Erroneous data</span>
+              <span>Correct data</span>
+              <span>Certifying document</span>
+              <span></span>
+            </div>
+            <div class="correction-row">
+              <input type="text" class="corr-wrong" placeholder="What's currently on file">
+              <input type="text" class="corr-right" placeholder="What it should say">
+              <input type="text" class="corr-proof" placeholder="e.g. Birth certificate">
+              <button type="button" class="row-remove" aria-label="Remove row">✕</button>
+            </div>
+          </div>
+          <button type="button" class="add-row-btn" id="addRowBtn">+ Add another item to correct</button>
+        </fieldset>
+
+        <div class="signature-note">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 12.5L11 4.5L13.5 7L5.5 15H3V12.5Z" stroke="currentColor" stroke-width="1.3"/></svg>
+          The PDF's signature and date lines are left blank — sign them by hand after printing.
+        </div>
+
+        <div class="submit-row">
+          <button type="button" class="submit" id="correctionGenerateBtn">Download completed PDF</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ===================== SUSPECTED BREACH (live submission, no PDF) ===================== -->
+    <div class="form-step" id="breachFormStep" style="display:none;">
+      <div class="current-choice-bar">
+        <span>Filing: <strong>Report a Suspected Breach</strong></span>
+        <button type="button" class="change-type-link change-type-btn">← Change request type</button>
+      </div>
+
+      <div class="urgent-banner show">
         <b>If this is an active, ongoing incident:</b>
         Submit this form, then call or message the DPO directly at <strong>[DPO contact number]</strong> — do not wait for an email reply. The Data Breach Response Team is notified the moment you submit.
       </div>
 
       <form id="privacyForm" action="https://formspree.io/f/xbgloyzv" method="POST">
-        <input type="hidden" name="report_mode" id="report_mode" value="inquiry">
-        <input type="hidden" name="_subject" id="emailSubject" value="NDHSCCI Privacy Channel — New Inquiry">
+        <input type="hidden" name="report_mode" value="breach">
+        <input type="hidden" name="_subject" value="NDHSCCI Privacy Channel — SUSPECTED BREACH">
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
         <div class="form-error" id="formError" role="alert"></div>
 
         <fieldset>
           <legend>Who you are</legend>
-          <div class="anon-toggle">
-            <input type="checkbox" id="anonToggle" name="submit_anonymously">
-            <label for="anonToggle" style="margin:0;font-weight:400;">I want to submit this anonymously (the DPO won't be able to follow up with you directly)</label>
-          </div>
           <div class="row2">
             <div class="field">
-              <label for="fullName">Full name <span class="opt">(optional if anonymous)</span></label>
+              <label for="fullName">Full name</label>
               <input type="text" id="fullName" name="full_name" autocomplete="name">
             </div>
             <div class="field">
@@ -133,7 +289,7 @@
               <input type="email" id="email" name="email" autocomplete="email">
             </div>
             <div class="field">
-              <label for="phone">Contact number <span class="opt">(optional)</span></label>
+              <label for="phone">Contact number</label>
               <input type="tel" id="phone" name="phone" autocomplete="tel">
             </div>
           </div>
@@ -142,8 +298,14 @@
         <fieldset>
           <legend>What this is about</legend>
           <div class="field">
-            <label for="natureSelect">Nature of your report</label>
-            <select id="natureSelect" name="nature"></select>
+            <label for="natureSelect">Nature of the breach</label>
+            <select id="natureSelect" name="nature">
+              <option>Lost or stolen device/document with student data</option>
+              <option>Unauthorized person accessed student records</option>
+              <option>Data sent to the wrong recipient</option>
+              <option>Suspicious system access or possible hacking</option>
+              <option>Other suspected breach</option>
+            </select>
           </div>
 
           <div class="field">
@@ -158,7 +320,7 @@
             </div>
           </div>
 
-          <div class="field" id="whenField" style="display:none;">
+          <div class="field">
             <label for="whenNoticed">When did you notice this?</label>
             <input type="date" id="whenNoticed" name="date_noticed">
           </div>
@@ -170,7 +332,7 @@
         </fieldset>
 
         <div class="submit-row">
-          <button type="submit" class="submit" id="submitBtn">Send to the Data Protection Officer</button>
+          <button type="submit" class="submit" id="submitBtn">Send urgent report to DPO &amp; Breach Response Team</button>
           <p class="submit-note">
             <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M2 6.5V4a4 4 0 0 1 8 0v2.5" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="6.5" width="10" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.3"/></svg>
             Sent directly to the DPO over an encrypted connection
@@ -183,7 +345,7 @@
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h2>Report received</h2>
-        <p id="confirmText">Your report has been sent to the Office of the Data Protection Officer. If you left contact details, you'll hear back within 3 business days.</p>
+        <p id="confirmText">Your report has been sent to the Office of the Data Protection Officer and the Data Breach Response Team has been alerted.</p>
         <div class="ref" id="refNumber">REF: —</div>
         <p style="margin-top:22px;"><a href="index.html">← Back to Home</a></p>
       </div>
@@ -203,6 +365,8 @@
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="pdf-forms.js"></script>
 <script src="nav.js"></script>
 <script src="report.js"></script>
 </body>
